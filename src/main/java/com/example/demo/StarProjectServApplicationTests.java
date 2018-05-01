@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class StarProjectServApplicationTests extends HttpServlet {
     @RequestMapping("/sash")
-    public String index(HttpServletRequest request, HttpServletResponse response) {
+    public Coord index(HttpServletRequest request, HttpServletResponse response) {
     
-            String lastname = request.getParameter("lastname");
-            String firstname = request.getParameter("firstname");
-            firstname = firstname.substring(0, 1);
-            return lastname + " " + firstname + ".";
+            String x = request.getParameter("x");
+            String y = request.getParameter("y");
+            Coord coord=new Coord(Integer.valueOf(x),Integer.valueOf(y));
+            return coord;
        
     }
 }
