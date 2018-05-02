@@ -12,7 +12,8 @@ public class StarProjectServApplicationTests extends HttpServlet {
     
             String x = request.getParameter("x");
             String y = request.getParameter("y");
-            Coord coord=new Coord(Integer.valueOf(x),Integer.valueOf(y));
+            //Coord coord=new Coord(Integer.valueOf(x),Integer.valueOf(y));
+            Coord coord=new Coord(Integer.valueOf((int)(Math.random()*800)),Integer.valueOf((int)(Math.random()*800)));
             return coord;
        
     }
