@@ -19,10 +19,11 @@ public class StarProjectServApplicationTests extends HttpServlet {
        
     }
     @RequestMapping("/battle")
-    public Integer createBattle(HttpServletRequest request, HttpServletResponse response)
+    public Coord createBattle(HttpServletRequest request, HttpServletResponse response)
     {
     	if(battleNumber==null)battleNumber=0;
     	else battleNumber++;
-    	return battleNumber;
+    	Coord coord=new Coord(battleNumber,400);
+    	return coord;
     }
 }
