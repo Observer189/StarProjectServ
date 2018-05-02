@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class StarProjectServApplicationTests extends HttpServlet {
+	public static Integer battleNumber;
     @RequestMapping("/sash")
     public Coord index(HttpServletRequest request, HttpServletResponse response) {
     
@@ -16,5 +17,12 @@ public class StarProjectServApplicationTests extends HttpServlet {
             Coord coord=new Coord(Integer.valueOf((int)(Math.random()*800+1)),Integer.valueOf((int)(Math.random()*800+1)));
             return coord;
        
+    }
+    @RequestMapping("/battle")
+    public Integer createBattle(HttpServletRequest request, HttpServletResponse response)
+    {
+    	if(battleNumber==null)battleNumber=0;
+    	else battleNumber++;
+    	return battleNumber;
     }
 }
