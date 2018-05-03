@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class StarProjectServApplicationTests extends HttpServlet {
 	public static Integer battleNumber;
+	public ArrayList<String> waitQueue;
     @RequestMapping("/sash")
     public Coord index(HttpServletRequest request, HttpServletResponse response) {
     
@@ -21,12 +24,12 @@ public class StarProjectServApplicationTests extends HttpServlet {
        
     }
     @RequestMapping("/battle")
-    public Coord createBattle(HttpServletRequest request, HttpServletResponse response)
+    public BattleStatus createBattle(HttpServletRequest request, HttpServletResponse response)
     {
     	if(battleNumber==null)battleNumber=0;
     	else battleNumber++;
-    	Coord coord=new Coord(battleNumber,400);
-    	return coord;
+    	
+    	return new BattleStatus(battleNumber,"some");
     }
     @RequestMapping("/battle/{battleNumber}")
     public Coord battle(HttpServletRequest request, HttpServletResponse response,@PathVariable("battleNumber")Integer number)
