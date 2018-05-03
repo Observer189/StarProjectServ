@@ -3,6 +3,8 @@ package com.example.demo;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 @RestController
@@ -26,4 +28,11 @@ public class StarProjectServApplicationTests extends HttpServlet {
     	Coord coord=new Coord(battleNumber,400);
     	return coord;
     }
+    @RequestMapping("/battle/{battleNumber}")
+    public Coord battle(HttpServletRequest request, HttpServletResponse response,@PathVariable("battleNumber")Integer number)
+    {
+    	Coord coord=new Coord(Integer.valueOf((int)(Math.random()*800+1)),Integer.valueOf((int)(Math.random()*800+1)));
+        return coord;
+    }
+    
 }
