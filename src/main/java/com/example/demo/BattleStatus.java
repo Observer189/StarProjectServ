@@ -3,14 +3,21 @@ package com.example.demo;
 public class BattleStatus { //класс необходимый для распределения игроков по боям
     Integer number;
     String status;
+    Integer queueSize;//размер очереди
     public BattleStatus()
     {
-        
+
     }
-    public BattleStatus(Integer number,String status)
+    public BattleStatus(Integer number,Integer queueSize,String status)
     {
-       this.number=number;
-       this.status=status;
+        this.number=number;
+        this.queueSize=queueSize;
+        this.status=status;
+    }
+    public BattleStatus(BattleStatus battleStatus)
+    {
+        this.status=battleStatus.getStatus();
+        this.number=battleStatus.getNumber();
     }
 
     public void setNumber(Integer battleNumber) {
@@ -28,4 +35,18 @@ public class BattleStatus { //класс необходимый для расп�
     public String getStatus() {
         return status;
     }
+    public void setBattleStatus(BattleStatus battleStatus)
+    {
+        this.setStatus(battleStatus.getStatus());
+        this.setNumber(battleStatus.getNumber());
+    }
+
+    public Integer getQueueSize() {
+        return queueSize;
+    }
+
+    public void setQueueSize(Integer queueSize) {
+        this.queueSize = queueSize;
+    }
 }
+

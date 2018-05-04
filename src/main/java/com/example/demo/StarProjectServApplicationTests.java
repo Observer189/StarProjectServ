@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class StarProjectServApplicationTests extends HttpServlet {
-	public Integer battleNumber=500;
-	public ArrayList<String> waitQueue;
+	public Integer battleNumber=0;
+	public ArrayList<String> waitQueue=new ArrayList<String>();
 	
     @RequestMapping("/sash")
     public Coord index(HttpServletRequest request, HttpServletResponse response) {
@@ -27,10 +27,16 @@ public class StarProjectServApplicationTests extends HttpServlet {
     @RequestMapping("/battle")
     public BattleStatus createBattle(HttpServletRequest request, HttpServletResponse response)
     {
-    	//if(battleNumber==null)battleNumber=0;
-    	/*else*/ battleNumber++;
+    	if(request.getParameter("status").equals("add"))
+    	{
+    		waitQueue.add(request.getParameter("name"));
+    		return new BattleStatus(null,waitQueue.size(),"wait");
+    	}
+    	else {
+    	 battleNumber++;
     	
-    	return new BattleStatus(battleNumber,"some");
+    	return new BattleStatus(battleNumber,waitQueue.size(),"some");
+    	}
     }
     @RequestMapping("/battle/{battleNumber}")
     public Coord battle(HttpServletRequest request, HttpServletResponse response,@PathVariable("battleNumber")Integer number)
