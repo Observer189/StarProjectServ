@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class StarProjectServApplicationTests extends HttpServlet {
 	public Integer battleNumber=0;
 	public ArrayList<String> waitQueue=new ArrayList<String>();
-	
+	public boolean battleIsExist=false;
     @RequestMapping("/sash")
     public Coord index(HttpServletRequest request, HttpServletResponse response) {
     
@@ -32,11 +32,37 @@ public class StarProjectServApplicationTests extends HttpServlet {
     		waitQueue.add(request.getParameter("name"));
     		return new BattleStatus(null,waitQueue.size(),"wait");
     	}
-    	else {
-    	 battleNumber++;
     	
-    	return new BattleStatus(battleNumber,waitQueue.size(),"some");
+    	if(request.getParameter("status").equals("wait"))
+    	{
+    		if((waitQueue.size()>1) || (battleIsExist))
+    		{
+    			if(waitQueue.get(0).equals(request.getParameter("name")))
+    					{		
+    			if(battleIsExist)
+    			{
+    				waitQueue.remove(0);
+    				battleIsExist=false;
+    				battleNumber++;
+    				return new BattleStatus(battleNumber-1,waitQueue.size(),"ready");
+    			}
+    			else
+    			{
+    				waitQueue.remove(0);
+    				battleIsExist=true;
+    				return new BattleStatus(battleNumber,waitQueue.size(),"ready");
+    			}
+    					}
+    			else return new BattleStatus(null,waitQueue.size(),"wait");
+    			
+    		}
+    		else return new BattleStatus(null,waitQueue.size(),"wait");
     	}
+    	
+    	
+    	
+    	else return new BattleStatus(battleNumber,waitQueue.size(),"some");
+    	
     }
     @RequestMapping("/battle/{battleNumber}")
     public Coord battle(HttpServletRequest request, HttpServletResponse response,@PathVariable("battleNumber")Integer number)
