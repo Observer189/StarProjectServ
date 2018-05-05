@@ -64,7 +64,7 @@ public class StarProjectServApplicationTests extends HttpServlet {
     	
     	else { 
     		waitQueue.clear();
-    		return new BattleStatus(battleNumber,waitQueue.size(),"clear");
+    		return new BattleStatus(null,waitQueue.size(),"clear");
     		}
     	
     }
