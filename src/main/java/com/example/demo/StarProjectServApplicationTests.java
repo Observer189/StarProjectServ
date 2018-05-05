@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class StarProjectServApplicationTests extends HttpServlet {
 	public Integer battleNumber=0;
-	public ArrayList<String> waitQueue=new ArrayList<String>();
+	public LinkedList<String> waitQueue=new LinkedList<String>();
 	public boolean battleIsExist=false;
     @RequestMapping("/sash")
     public Coord index(HttpServletRequest request, HttpServletResponse response) {
@@ -61,7 +62,10 @@ public class StarProjectServApplicationTests extends HttpServlet {
     	
     	
     	
-    	else return new BattleStatus(battleNumber,waitQueue.size(),"some");
+    	else { 
+    		waitQueue.clear();
+    		return new BattleStatus(battleNumber,waitQueue.size(),"clear");
+    		}
     	
     }
     @RequestMapping("/battle/{battleNumber}")
