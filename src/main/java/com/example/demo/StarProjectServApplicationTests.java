@@ -42,21 +42,21 @@ public class StarProjectServApplicationTests extends HttpServlet {
     		if((waitQueue.size()>1) || (battleIsExist))
     		{
     			if(waitQueue.get(0).equals(request.getParameter("name")))
-    					{		
+    			{		
     			if(battleIsExist)
-    			{
+    			    {
     				waitQueue.remove(0);
     				battleIsExist=false;
     				battleNumber++;
     				return new BattleStatus(battleNumber-1,waitQueue.size(),"ready");
-    			}
+    			     }
     			else
-    			{
+    			     {
     				waitQueue.remove(0);
     				battleIsExist=true;
     				return new BattleStatus(battleNumber,waitQueue.size(),"ready");
+    			      }
     			}
-    					}
     			else return new BattleStatus(null,waitQueue.size(),"wait");
     			
     		}
@@ -67,6 +67,7 @@ public class StarProjectServApplicationTests extends HttpServlet {
     	
     	else { 
     		waitQueue.clear();
+    		battleIsExist=false;
     		return new BattleStatus(null,waitQueue.size(),"clear");
     		}
     	
