@@ -30,7 +30,10 @@ public class StarProjectServApplicationTests extends HttpServlet {
     {
     	if(request.getParameter("status").equals("add"))
     	{
+    		if(waitQueue.indexOf(request.getParameter("name"))==-1)
+    		{
     		waitQueue.add(request.getParameter("name"));
+    		}
     		return new BattleStatus(null,waitQueue.size(),"wait");
     	}
     	
