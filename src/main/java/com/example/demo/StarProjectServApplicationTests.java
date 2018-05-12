@@ -34,7 +34,7 @@ public class StarProjectServApplicationTests extends HttpServlet {
     		{
     		waitQueue.add(request.getParameter("name"));
     		}
-    		return new BattleStatus(null,waitQueue.size(),"wait");
+    		return new BattleStatus(null,waitQueue.size(),"wait",null);
     	}
     	
     	if(request.getParameter("status").equals("wait"))
@@ -48,19 +48,19 @@ public class StarProjectServApplicationTests extends HttpServlet {
     				waitQueue.remove(0);
     				battleIsExist=false;
     				battleNumber++;
-    				return new BattleStatus(battleNumber-1,waitQueue.size(),"ready");
+    				return new BattleStatus(battleNumber-1,waitQueue.size(),"ready",1);
     			     }
     			else
     			     {
     				waitQueue.remove(0);
     				battleIsExist=true;
-    				return new BattleStatus(battleNumber,waitQueue.size(),"ready");
+    				return new BattleStatus(battleNumber,waitQueue.size(),"ready",2);
     			      }
     			}
-    			else return new BattleStatus(null,waitQueue.size(),"wait");
+    			else return new BattleStatus(null,waitQueue.size(),"wait",null);
     			
     		}
-    		else return new BattleStatus(null,waitQueue.size(),"wait");
+    		else return new BattleStatus(null,waitQueue.size(),"wait",null);
     	}
     	
     	
@@ -68,7 +68,7 @@ public class StarProjectServApplicationTests extends HttpServlet {
     	else { 
     		waitQueue.clear();
     		battleIsExist=false;
-    		return new BattleStatus(null,waitQueue.size(),"clear");
+    		return new BattleStatus(null,waitQueue.size(),"clear",null);
     		}
     	
     }
