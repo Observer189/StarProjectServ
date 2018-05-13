@@ -15,16 +15,7 @@ public class StarProjectServApplicationTests extends HttpServlet {
 	public Integer battleNumber=0;
 	public LinkedList<String> waitQueue=new LinkedList<String>();
 	public boolean battleIsExist=false;
-    @RequestMapping("/sash")
-    public Coord index(HttpServletRequest request, HttpServletResponse response) {
-    
-            String x = request.getParameter("x");
-            String y = request.getParameter("y");
-            //Coord coord=new Coord(Integer.valueOf(x),Integer.valueOf(y));
-            Coord coord=new Coord(Integer.valueOf((int)(Math.random()*800+1)),Integer.valueOf((int)(Math.random()*800+1)));
-            return coord;
-       
-    }
+   
     @RequestMapping("/battle")
     public BattleStatus createBattle(HttpServletRequest request, HttpServletResponse response)
     {
@@ -76,7 +67,7 @@ public class StarProjectServApplicationTests extends HttpServlet {
     public Coord battle(HttpServletRequest request, HttpServletResponse response,@PathVariable("battleNumber")Integer number)
     {
         
-    	Coord coord=new Coord(Integer.valueOf((int)(Math.random()*800+1)),Integer.valueOf((int)(Math.random()*800+1)));
+    	Coord coord=new Coord(Float.valueOf(request.getParameter("x")),Float.valueOf(request.getParameter("y")));
         return coord;
     }
     
