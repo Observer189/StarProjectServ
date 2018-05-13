@@ -12,6 +12,11 @@ public class Coord {
         this.x=x;
         this.y=y;
     }
+    public Coord(Coord coord)
+    {
+    	x=coord.getX();
+    	y=coord.getY();
+    }
     public void setX(float x)
     {
         this.x=x;
