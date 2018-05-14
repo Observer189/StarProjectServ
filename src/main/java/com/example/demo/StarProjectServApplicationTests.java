@@ -78,7 +78,7 @@ public class StarProjectServApplicationTests extends HttpServlet {
     	if(vectorTranslator.containsKey(request.getParameter("enemyName")))
     	{
     	Coord coord=new Coord(vectorTranslator.get(request.getParameter("enemyName")));
-        return coord;
+        return new Coord(500f,500f);
     	}
     	else return new Coord(333f,333f);
     }
