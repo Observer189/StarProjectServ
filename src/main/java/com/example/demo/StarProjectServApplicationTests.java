@@ -87,5 +87,14 @@ public class StarProjectServApplicationTests extends HttpServlet {
     {
     	return vectorTranslator;
     }
+    @RequestMapping("/clear")
+    public void clear(HttpServletRequest request, HttpServletResponse response)//очистка сервера
+    {
+    	waitQueue.clear();
+    	vectorTranslator.clear();
+    	battleNumber=0;
+    	battleIsExist=false;
+    	name1=null;
+    }
     
 }
