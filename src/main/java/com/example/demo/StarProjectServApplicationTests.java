@@ -75,12 +75,12 @@ public class StarProjectServApplicationTests extends HttpServlet {
         vectorTranslator.put(request.getParameter("name"), 
         		new Coord(Float.valueOf(request.getParameter("x")),Float.valueOf(request.getParameter("y"))));
     			
-    	//if(vectorTranslator.containsKey(request.getParameter("enemyName")))
-    	//{
+    	if(vectorTranslator.containsKey(request.getParameter("enemyName")))
+    	{
     	Coord coord=new Coord(vectorTranslator.get(request.getParameter("enemyName")));
         return coord;
-    	//}
-    	//else return new Coord(333f,333f);
+    	}
+    	else return new Coord(333f,333f);
     }
     @RequestMapping("/listen")
     public HashMap listen(HttpServletRequest request, HttpServletResponse response)
