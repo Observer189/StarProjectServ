@@ -82,5 +82,10 @@ public class StarProjectServApplicationTests extends HttpServlet {
     	}
     	else return new Coord(0f,0f);
     }
+    @RequestMapping("/listen")
+    public HashMap listen(HttpServletRequest request, HttpServletResponse response)
+    {
+    	return vectorTranslator;
+    }
     
 }
