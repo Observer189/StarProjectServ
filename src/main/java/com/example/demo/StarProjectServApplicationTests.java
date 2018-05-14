@@ -80,7 +80,7 @@ public class StarProjectServApplicationTests extends HttpServlet {
     	Coord coord=new Coord(vectorTranslator.get(request.getParameter("enemyName")));
         return coord;
     	}
-    	else return new Coord(0f,0f);
+    	else return new Coord(333f,333f);
     }
     @RequestMapping("/listen")
     public HashMap listen(HttpServletRequest request, HttpServletResponse response)
