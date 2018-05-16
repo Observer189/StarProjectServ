@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class StarProjectServApplicationTests extends HttpServlet {
 	public Integer battleNumber=0;
-	public LinkedList<String> waitQueue=new LinkedList<String>();
+	public LinkedList<Player> waitQueue=new LinkedList<Player>();
 	public boolean battleIsExist=false;
     public HashMap<String,Coord> vectorTranslator = new HashMap<String,Coord>();
-    static String name1;
+    static String player1Name;
+    static String ship1Name;
+    static String ship2Name;
     @RequestMapping("/battle")
     public BattleStatus createBattle(HttpServletRequest request, HttpServletResponse response)
     {
@@ -26,7 +28,7 @@ public class StarProjectServApplicationTests extends HttpServlet {
     	{
     		if(waitQueue.indexOf(request.getParameter("name"))==-1)
     		{
-    		waitQueue.add(request.getParameter("name"));
+    		waitQueue.add(new Player(request.getParameter("name"),request.getParameter("shipName")));
     		}
     		return new BattleStatus(null,waitQueue.size(),null,"wait",null);
     	}
@@ -43,14 +45,15 @@ public class StarProjectServApplicationTests extends HttpServlet {
     				waitQueue.remove(0);
     				battleIsExist=false;
     				battleNumber++;
-    				return new BattleStatus(battleNumber-1,waitQueue.size(),name1,"ready",1);
+    				return new BattleStatus(battleNumber-1,waitQueue.size(),player1Name,"ready",1);
     			     }
     			else
     			     {
-    				name1=request.getParameter("name");
+    				
+    				player1Name=request.getParameter("name");
     				waitQueue.remove(0);
     				battleIsExist=true;
-    				return new BattleStatus(battleNumber,waitQueue.size(),waitQueue.get(0),"ready",2);
+    				return new BattleStatus(battleNumber,waitQueue.size(),waitQueue.get(0).getName(),"ready",2);
     			      }
     			}
     			else return new BattleStatus(null,waitQueue.size(),null,"wait",null);
@@ -77,8 +80,8 @@ public class StarProjectServApplicationTests extends HttpServlet {
     			
     	if(vectorTranslator.containsKey(request.getParameter("enemyName")))
     	{
-    	Coord coord=new Coord(vectorTranslator.get(request.getParameter("enemyName")));
-        return new Coord(500f,500f);
+    	Coord coord=new Coord(vectorTranslator.get(request.getParameter("enemyName")));    	
+        return coord;
     	}
     	else return new Coord(333f,333f);
     }
@@ -88,13 +91,13 @@ public class StarProjectServApplicationTests extends HttpServlet {
     	return vectorTranslator;
     }
     @RequestMapping("/clear")
-    public void clear(HttpServletRequest request, HttpServletResponse response)//очистка сервера
+    public void clear(HttpServletRequest request, HttpServletResponse response)
     {
     	waitQueue.clear();
     	vectorTranslator.clear();
     	battleNumber=0;
     	battleIsExist=false;
-    	name1=null;
+    	player1Name=null;
     }
     
 }
