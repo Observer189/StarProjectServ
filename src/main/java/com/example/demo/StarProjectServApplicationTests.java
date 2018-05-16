@@ -19,18 +19,18 @@ public class StarProjectServApplicationTests extends HttpServlet {
     public HashMap<String,Coord> vectorTranslator = new HashMap<String,Coord>();
     static String player1Name;
     static String ship1Name;
-    static String ship2Name;
+    
     @RequestMapping("/battle")
     public BattleStatus createBattle(HttpServletRequest request, HttpServletResponse response)
     {
     	
     	if(request.getParameter("status").equals("add"))
     	{
-    		if(waitQueue.indexOf(request.getParameter("name"))==-1)
+    		if(waitQueue.indexOf(new Player(request.getParameter("name"),request.getParameter("shipName")))==-1)
     		{
     		waitQueue.add(new Player(request.getParameter("name"),request.getParameter("shipName")));
     		}
-    		return new BattleStatus(null,waitQueue.size(),null,"wait",null);
+    		return new BattleStatus(null,waitQueue.size(),null,null,"wait",null);
     	}
     	
     	if(request.getParameter("status").equals("wait"))
@@ -38,28 +38,29 @@ public class StarProjectServApplicationTests extends HttpServlet {
     		
     		if((waitQueue.size()>1) || (battleIsExist))
     		{
-    			if(waitQueue.get(0).equals(request.getParameter("name")))
+    			if(waitQueue.get(0).name.equals(request.getParameter("name")))
     			{		
     			if(battleIsExist)
     			    {
     				waitQueue.remove(0);
     				battleIsExist=false;
     				battleNumber++;
-    				return new BattleStatus(battleNumber-1,waitQueue.size(),player1Name,"ready",1);
+    				return new BattleStatus(battleNumber-1,waitQueue.size(),player1Name,ship1Name,"ready",1);
     			     }
     			else
     			     {
     				
     				player1Name=request.getParameter("name");
+    				ship1Name=request.getParameter("shipName");
     				waitQueue.remove(0);
     				battleIsExist=true;
-    				return new BattleStatus(battleNumber,waitQueue.size(),waitQueue.get(0).getName(),"ready",2);
+    				return new BattleStatus(battleNumber,waitQueue.size(),waitQueue.get(0).getName(),waitQueue.get(0).getShipName(),"ready",2);
     			      }
     			}
-    			else return new BattleStatus(null,waitQueue.size(),null,"wait",null);
+    			else return new BattleStatus(null,waitQueue.size(),null,null,"wait",null);
     			
     		}
-    		else return new BattleStatus(null,waitQueue.size(),null,"wait",null);
+    		else return new BattleStatus(null,waitQueue.size(),null,null,"wait",null);
     	}
     	
     	
@@ -67,7 +68,7 @@ public class StarProjectServApplicationTests extends HttpServlet {
     	else { 
     		waitQueue.clear();
     		battleIsExist=false;
-    		return new BattleStatus(null,waitQueue.size(),null,"clear",null);
+    		return new BattleStatus(null,waitQueue.size(),null,null,"clear",null);
     		}
     	
     }
