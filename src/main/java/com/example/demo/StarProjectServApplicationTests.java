@@ -77,7 +77,7 @@ public class StarProjectServApplicationTests extends HttpServlet {
     public Coord battle(@RequestParam(name="name") String name,@RequestParam(name="enemyName") String enemyName,@RequestParam(name="x") float x,
     		@RequestParam(name="y") float y,@PathVariable("battleNumber")Integer number)
     {
-    	System.out.println("Method battle: "+name+","+enemyName+","+x+","+y);
+    	System.err.println("Method battle: "+name+","+enemyName+","+x+","+y);
         vectorTranslator.put(name, new Coord(x,y));
     	if(vectorTranslator.containsKey(enemyName))
     	{
