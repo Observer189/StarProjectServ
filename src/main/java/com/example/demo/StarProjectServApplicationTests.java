@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class StarProjectServApplicationTests extends HttpServlet {
@@ -73,15 +74,14 @@ public class StarProjectServApplicationTests extends HttpServlet {
     	
     }
     @RequestMapping("/battle/{battleNumber}")
-    public Coord battle(HttpServletRequest request, HttpServletResponse response,@PathVariable("battleNumber")Integer number)
+    public Coord battle(@RequestParam(name="name") String name,@RequestParam(name="enemyName") String enemyName,@RequestParam(name="x") float x,
+    		@RequestParam(name="y") float y,@PathVariable("battleNumber")Integer number)
     {
-    	
-        vectorTranslator.put(request.getParameter("name"), 
-        		new Coord(Float.valueOf(request.getParameter("x")),Float.valueOf(request.getParameter("y"))));
-    			
-    	if(vectorTranslator.containsKey(request.getParameter("enemyName")))
+    	System.out.println("Method battle: "+name+","+enemyName+","+x+","+y);
+        vectorTranslator.put(name, new Coord(x,y));
+    	if(vectorTranslator.containsKey(enemyName))
     	{
-    	Coord coord=new Coord(vectorTranslator.get(request.getParameter("enemyName")));    	
+    	Coord coord=new Coord(vectorTranslator.get(enemyName));    	
         return coord;
     	}
     	else return new Coord(333f,333f);
