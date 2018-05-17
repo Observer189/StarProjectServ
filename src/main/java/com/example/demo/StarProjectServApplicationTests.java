@@ -22,24 +22,26 @@ public class StarProjectServApplicationTests extends HttpServlet {
     static String ship1Name;
     
     @RequestMapping("/battle")
-    public BattleStatus createBattle(HttpServletRequest request, HttpServletResponse response)
+    public BattleStatus createBattle(@RequestParam(name="name")String name,@RequestParam(name="shipName")String shipName,
+    		@RequestParam(name="status")String status)
     {
     	
-    	if(request.getParameter("status").equals("add"))
-    	{
-    		if(waitQueue.indexOf(new Player(request.getParameter("name"),request.getParameter("shipName")))==-1)
+    	switch(status) {
+    	case "add":
+    		for(Player i:waitQueue)
     		{
-    		waitQueue.add(new Player(request.getParameter("name"),request.getParameter("shipName")));
+    		if(i.name.equals(name))
+    		{
+    			return new BattleStatus(null,waitQueue.size(),null,null,"wait",null);
     		}
-    		return new BattleStatus(null,waitQueue.size(),null,null,"wait",null);
-    	}
-    	
-    	if(request.getParameter("status").equals("wait"))
-    	{
+    		}
+    		waitQueue.add(new Player(name,shipName));
     		
+    		
+    	case "wait": 
     		if((waitQueue.size()>1) || (battleIsExist))
     		{
-    			if(waitQueue.get(0).name.equals(request.getParameter("name")))
+    			if(waitQueue.get(0).name.equals(name))
     			{		
     			if(battleIsExist)
     			    {
@@ -51,8 +53,8 @@ public class StarProjectServApplicationTests extends HttpServlet {
     			else
     			     {
     				
-    				player1Name=request.getParameter("name");
-    				ship1Name=request.getParameter("shipName");
+    				player1Name=name;
+    				ship1Name=shipName;
     				waitQueue.remove(0);
     				battleIsExist=true;
     				return new BattleStatus(battleNumber,waitQueue.size(),waitQueue.get(0).getName(),waitQueue.get(0).getShipName(),"ready",2);
@@ -62,16 +64,15 @@ public class StarProjectServApplicationTests extends HttpServlet {
     			
     		}
     		else return new BattleStatus(null,waitQueue.size(),null,null,"wait",null);
+
+    		default:
+        		waitQueue.clear();
+        		battleIsExist=false;
+        		return new BattleStatus(null,waitQueue.size(),null,null,"clear",null);
     	}
     	
     	
-    	
-    	else { 
-    		waitQueue.clear();
-    		battleIsExist=false;
-    		return new BattleStatus(null,waitQueue.size(),null,null,"clear",null);
-    		}
-    	
+  	
     }
     @RequestMapping("/battle/{battleNumber}")
     public Coord battle(@RequestParam(name="name") String name,@RequestParam(name="enemyName") String enemyName,@RequestParam(name="x") float x,
