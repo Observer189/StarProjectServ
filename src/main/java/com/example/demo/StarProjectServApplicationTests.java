@@ -64,7 +64,15 @@ public class StarProjectServApplicationTests extends HttpServlet {
     			
     		}
     		else return new BattleStatus(null,waitQueue.size(),null,null,"wait",null);
-
+    	   case "delete":
+    		   for(Player i:waitQueue)
+       		{
+       		if(i.name.equals(name))
+       		{
+       			waitQueue.remove(i);
+       			return new BattleStatus(null,waitQueue.size(),null,null,"deleted",null);
+       		}
+       		}
     		default:
         		waitQueue.clear();
         		battleIsExist=false;
