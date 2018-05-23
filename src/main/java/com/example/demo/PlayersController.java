@@ -12,8 +12,8 @@ import repositories.PlayersRepository;
 @RestController
 @RequestMapping("players")
 public class PlayersController {
-	
-    private PlayersRepository players=new PlayersRepository();
+	@Autowired
+    private PlayersRepository players;
 	@RequestMapping("/create")
     public int createPlayer(@RequestParam(name="name") String name,@RequestParam(name="money") int money)
     {
@@ -27,19 +27,19 @@ public class PlayersController {
     	return players.updatePlayer(name, money);
     }
     @RequestMapping("/delete")
-    public int deletePlayer(@RequestParam(name="name") String name,@RequestParam(name="money") int money)
+    public int deletePlayer(@RequestParam(name="name") String name)
     {
     	
     	return players.deletePlayer(name);
     }
     @RequestMapping("/getPlayer")
-    public Player getPlayer(@RequestParam(name="name") String name,@RequestParam(name="money") int money)
+    public Player getPlayer(@RequestParam(name="name") String name)
     {
     	
     	return players.getPlayer(name);
     }
     @RequestMapping("/getPlayerList")
-    public List<Player> getPlayerList(@RequestParam(name="name") String name,@RequestParam(name="money") int money)
+    public List<Player> getPlayerList()
     {
     	
     	return players.getPlayers();
