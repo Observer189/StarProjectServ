@@ -1,17 +1,20 @@
 package com.example.demo;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import repositories.PlayersRepository;
 @RestController
 public class StarProjectServApplicationTests extends HttpServlet {
 	public Integer battleNumber=0;
@@ -20,7 +23,8 @@ public class StarProjectServApplicationTests extends HttpServlet {
     public HashMap<String,Coord> vectorTranslator = new HashMap<String,Coord>();
     static String player1Name;
     static String ship1Name;
-    
+    @Autowired
+    private PlayersRepository players;
     @RequestMapping("/battle")
     public BattleStatus createBattle(@RequestParam(name="name")String name,@RequestParam(name="shipName")String shipName,
     		@RequestParam(name="status")String status)
@@ -109,5 +113,34 @@ public class StarProjectServApplicationTests extends HttpServlet {
     	battleIsExist=false;
     	player1Name=null;
     }
-    
+    @RequestMapping("/database/create")
+    public int createPlayer(@RequestParam(name="name") String name,@RequestParam(name="money") int money)
+    {
+    	
+    	return players.createPlayer(name, money);
+    }
+    @RequestMapping("/database/update")
+    public int updatePlayer(@RequestParam(name="name") String name,@RequestParam(name="money") int money)
+    {
+    	
+    	return players.updatePlayer(name, money);
+    }
+    @RequestMapping("/database/delete")
+    public int deletePlayer(@RequestParam(name="name") String name,@RequestParam(name="money") int money)
+    {
+    	
+    	return players.deletePlayer(name);
+    }
+    @RequestMapping("/database/getPlayer")
+    public Player getPlayer(@RequestParam(name="name") String name,@RequestParam(name="money") int money)
+    {
+    	
+    	return players.getPlayer(name);
+    }
+    @RequestMapping("/database/getPlayerList")
+    public List<Player> getPlayerList(@RequestParam(name="name") String name,@RequestParam(name="money") int money)
+    {
+    	
+    	return players.getPlayers();
+    }
 }
