@@ -13,6 +13,10 @@ public class PlayersRepository {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	public PlayersRepository() {
+	}
+	
 	public int createPlayer(String name,int money)
 	{
 		return jdbcTemplate.update("INSERT INTO \"Players\" (\"Name\",\"Money\") VALUES (?,?)",name,money);
