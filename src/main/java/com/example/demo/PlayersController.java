@@ -12,7 +12,7 @@ import repositories.PlayersRepository;
 @RestController
 @RequestMapping("players")
 public class PlayersController {
-	@Autowired
+	@Autowired(required=false)
     private PlayersRepository players;
 	@RequestMapping("/create")
     public int createPlayer(@RequestParam(name="name") String name,@RequestParam(name="money") int money)
