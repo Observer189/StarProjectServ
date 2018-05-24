@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan("repositories")
+@ComponentScan
 @SpringBootApplication
 public class StarProjectServApplication {
 

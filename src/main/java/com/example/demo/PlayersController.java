@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import repositories.PlayersRepository;
+import com.example.demo.repositories.PlayersRepository;
 
 @RestController
 @RequestMapping("players")

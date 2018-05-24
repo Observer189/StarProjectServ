@@ -1,4 +1,4 @@
-package repositories;
+package com.example.demo.repositories;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
