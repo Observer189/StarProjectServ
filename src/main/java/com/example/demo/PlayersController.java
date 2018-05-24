@@ -12,8 +12,8 @@ import repositories.PlayersRepository;
 @RestController
 @RequestMapping("players")
 public class PlayersController {
-	@Autowired
-    private PlayersRepository players;
+	
+    private PlayersRepository players=new PlayersRepository();
 	@RequestMapping("/create")
     public int createPlayer(@RequestParam(name="name") String name,@RequestParam(name="money") int money)
     {
