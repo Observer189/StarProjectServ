@@ -27,7 +27,7 @@ public class PlayersRepository {
 	}
 	public int deletePlayer(String name)
 	{
-		return jdbcTemplate.update("DELETE FROM \"PLAYERS\" WHERE \"Name\"=?",name);
+		return jdbcTemplate.update("DELETE FROM \"Players\" WHERE \"Name\"=?",name);
 	}
 	public Player getPlayer(String name)
 	{
