@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import repositories.PlayersRepository;
 
 @RestController
-@RequestMapping("players")
 public class PlayersController {
 	
     private PlayersRepository players=new PlayersRepository();
