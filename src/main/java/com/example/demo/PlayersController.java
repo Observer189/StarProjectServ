@@ -14,7 +14,7 @@ import repositories.PlayersRepository;
 public class PlayersController {
 	
     private PlayersRepository players=new PlayersRepository();
-	@RequestMapping(value="/create",consumes="text/plain")
+	@RequestMapping("/create")
     public int createPlayer(@RequestParam(name="name") String name,@RequestParam(name="money") int money)
     {
     	
