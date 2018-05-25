@@ -2,6 +2,7 @@ package com.example.demo;
 
 public class Player {
     String name;
+    String password;
     int money;
     String shipName;
     public Player() {}
@@ -11,9 +12,10 @@ public class Player {
     	this.name=name;
     	this.shipName=shipName;
     }
-    public Player(String name,int money,String shipName)
+    public Player(String name,String password,int money,String shipName)
     {
     	this.name=name;
+    	this.password=password;
     	this.money=money;
     	this.shipName=shipName;
     }
@@ -28,6 +30,12 @@ public class Player {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getShipName() {
 		return shipName;

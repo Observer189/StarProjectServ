@@ -13,6 +13,7 @@ public class PlayersMapper implements RowMapper<Player> {
 	public Player mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Player player=new Player();
 		player.setName(rs.getString("Name"));
+		player.setPassword(rs.getString("Password"));
 		player.setMoney(rs.getInt("Money"));
 		return player;
 	}
