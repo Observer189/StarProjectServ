@@ -17,9 +17,10 @@ public class PlayersRepository {
 	public PlayersRepository() {
 	}
 	
-	public int createPlayer(String name,int money)
+	public int createPlayer(String name,String password,int money)
 	{
-		return jdbcTemplate.update("INSERT INTO \"Players\" (\"Name\",\"Money\") VALUES (?,?)",name,money);
+		return jdbcTemplate.update("INSERT INTO \"Players\" (\"Name\",\"Password\",\"Money\") "
+				+ "VALUES (?,?,?)",name,password,money);
 	}
 	public int updatePlayer(String name,int money)
 	{
