@@ -19,11 +19,11 @@ public class PlayersController {
     {
 		if(players.getPlayer(name)==null) {
 		players.createPlayer(name,password,money);
-    	return 1;
+    	return new Integer(1);
 		}
 		else 
 		{
-			return 0;
+			return new Integer(0);
 		}
     }
     @RequestMapping("/update")
