@@ -17,11 +17,12 @@ public class PlayersController {
 	@RequestMapping("/create")
     public int createPlayer(@RequestParam(name="name") String name,@RequestParam(name="password") String password,@RequestParam(name="money") int money)
     {
-		if(players.getPlayer(name)!=null) {
+		if(players.getPlayer(name)==null) {
 		players.createPlayer(name,password,money);
     	return 1;
 		}
-		else {
+		else 
+		{
 			return 0;
 		}
     }
