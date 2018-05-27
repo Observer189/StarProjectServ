@@ -3,6 +3,7 @@ package com.example.demo.repositories;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -32,7 +33,13 @@ public class PlayersRepository {
 	}
 	public Player getPlayer(String name)
 	{
+		try {
 		return jdbcTemplate.queryForObject("SELECT * FROM \"Players\" WHERE \"Name\"=?",new PlayersMapper(),name);
+		}
+		catch(EmptyResultDataAccessException e)
+		{
+			return null;
+		}
 	}
 	public List<Player> getPlayers()
 	{
