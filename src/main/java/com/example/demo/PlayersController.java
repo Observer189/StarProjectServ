@@ -15,15 +15,15 @@ public class PlayersController {
 	@Autowired
     private PlayersRepository players;
 	@RequestMapping("/create")
-    public Integer createPlayer(@RequestParam(name="name") String name,@RequestParam(name="password") String password,@RequestParam(name="money") int money)
+    public String createPlayer(@RequestParam(name="name") String name,@RequestParam(name="password") String password,@RequestParam(name="money") int money)
     {
 		if(players.getPlayer(name)==null) {
 		players.createPlayer(name,password,money);
-    	return new Integer(1);
+    	return "Succes";
 		}
 		else 
 		{
-			return new Integer(0);
+			return "Failed";
 		}
     }
     @RequestMapping("/update")
