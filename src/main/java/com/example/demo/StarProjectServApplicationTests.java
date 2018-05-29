@@ -86,17 +86,21 @@ public class StarProjectServApplicationTests extends HttpServlet {
   	
     }
     @RequestMapping("/battle/{battleNumber}")
-    public Coord battle(@RequestParam(name="name") String name,@RequestParam(name="enemyName") String enemyName,@RequestParam(name="x") float x,
-    		@RequestParam(name="y") float y,@PathVariable("battleNumber")Integer number)
+    public Coord battle(@RequestParam(name="name") String name,
+    		@RequestParam(name="enemyName") String enemyName,
+    		@RequestParam(name="x") float x,
+    		@RequestParam(name="y") float y,
+    		@RequestParam(name="rotation")float rotation,
+    		@PathVariable("battleNumber")Integer number)
     {
     	System.err.println("Method battle: "+name+","+enemyName+","+x+","+y);
-        vectorTranslator.put(name, new Coord(x,y));
+        vectorTranslator.put(name, new Coord(x,y,rotation));
     	if(vectorTranslator.containsKey(enemyName))
     	{
     	Coord coord=new Coord(vectorTranslator.get(enemyName));    	
         return coord;
     	}
-    	else return new Coord(333f,333f);
+    	else return new Coord(333f,333f,0f);
     }
     @RequestMapping("/listen")
     public HashMap listen(HttpServletRequest request, HttpServletResponse response)

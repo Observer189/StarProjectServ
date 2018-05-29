@@ -42,7 +42,14 @@ public class PlayersController {
     public Player getPlayer(@RequestParam(name="name") String name)
     {
     	
-    	return players.getPlayer(name);
+    	if(players.getPlayer(name)!=null)
+    	{
+    		return players.getPlayer(name);
+    	}
+    	else
+    	{
+    		return null;
+    	}
     }
     @RequestMapping("/getPlayerList")
     public List<Player> getPlayerList()
