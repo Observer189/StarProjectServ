@@ -25,10 +25,17 @@ public class StarProjectServApplicationTests extends HttpServlet {
     static String ship1Name;
    
     @RequestMapping("/battle")
-    public BattleStatus createBattle(@RequestParam(name="name")String name,@RequestParam(name="shipName")String shipName,
+    public BattleStatus createBattle(@RequestParam(name="name")String name,
+    		@RequestParam(name="shipName")String shipName,
     		@RequestParam(name="status")String status)
     {
-    	
+    	for(Player i:waitQueue)
+		{
+		if(i.getLastRequestTime()+5000<System.currentTimeMillis())
+		{
+			waitQueue.remove(i);
+		}
+		}
     	switch(status) {
     	case "add":
     		for(Player i:waitQueue)
@@ -41,7 +48,14 @@ public class StarProjectServApplicationTests extends HttpServlet {
     		waitQueue.add(new Player(name,shipName));
     		
     		
-    	case "wait": 
+    	case "wait":
+    		for(Player i:waitQueue)
+    		{
+    		if(i.name.equals(name))
+    		{
+    			i.setLastRequestTime(System.currentTimeMillis());
+    		}
+    		}
     		if((waitQueue.size()>1) || (battleIsExist))
     		{
     			if(waitQueue.get(0).name.equals(name))

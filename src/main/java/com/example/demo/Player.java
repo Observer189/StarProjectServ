@@ -5,6 +5,7 @@ public class Player {
     String password;
     int money;
     String shipName;
+    long lastRequestTime;
     public Player() {}
 
     public Player(String name,String shipName)
@@ -18,9 +19,18 @@ public class Player {
     	this.password=password;
     	this.money=money;
     	this.shipName=shipName;
+    	lastRequestTime=System.currentTimeMillis();
     }
     
-    @Override
+    public long getLastRequestTime() {
+		return lastRequestTime;
+	}
+
+	public void setLastRequestTime(long lastRequestTime) {
+		this.lastRequestTime = lastRequestTime;
+	}
+
+	@Override
     public boolean equals(Object obj) {
     	return ((Player)obj).name.equals(name);
     }
