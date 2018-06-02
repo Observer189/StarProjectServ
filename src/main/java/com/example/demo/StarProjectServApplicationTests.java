@@ -74,7 +74,7 @@ public class StarProjectServApplicationTests extends HttpServlet {
     				ship1=ship;
     				waitQueue.remove(0);
     				battleIsExist=true;
-    				return new BattleStatus(battleNumber,waitQueue.size(),waitQueue.get(0).getName(),ship1,"ready",2);
+    				return new BattleStatus(battleNumber,waitQueue.size(),waitQueue.get(0).getName(),waitQueue.get(0).getShip(),"ready",2);
     			      }
     			}
     			else return new BattleStatus(null,waitQueue.size(),null,null,"wait",null);
@@ -129,6 +129,11 @@ public class StarProjectServApplicationTests extends HttpServlet {
     	battleNumber=0;
     	battleIsExist=false;
     	player1Name=null;
+    }
+    @RequestMapping("/listenWaitQueue")
+    public LinkedList listenQueue(HttpServletRequest request, HttpServletResponse response)
+    {
+    	return waitQueue;
     }
     
 }
