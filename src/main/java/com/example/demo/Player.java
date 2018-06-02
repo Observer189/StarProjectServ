@@ -4,21 +4,21 @@ public class Player {
     String name;
     String password;
     int money;
-    String shipName;
+    ServShip ship;
     long lastRequestTime;
     public Player() {}
 
-    public Player(String name,String shipName)
+    public Player(String name,ServShip ship)
     {
     	this.name=name;
-    	this.shipName=shipName;
+    	this.ship=ship;
     }
-    public Player(String name,String password,int money,String shipName)
+    public Player(String name,String password,int money,ServShip ship)
     {
     	this.name=name;
     	this.password=password;
     	this.money=money;
-    	this.shipName=shipName;
+    	this.ship=ship;
     	lastRequestTime=System.currentTimeMillis();
     }
     
@@ -47,11 +47,11 @@ public class Player {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getShipName() {
-		return shipName;
+	public ServShip getShip() {
+		return ship;
 	}
-	public void setShipName(String shipName) {
-		this.shipName = shipName;
+	public void setShip(ServShip ship) {
+		this.ship = ship;
 	}
 	public int getMoney() {
 		return money;

@@ -22,11 +22,11 @@ public class StarProjectServApplicationTests extends HttpServlet {
 	public boolean battleIsExist=false;
     public HashMap<String,Coord> vectorTranslator = new HashMap<String,Coord>();
     static String player1Name;
-    static String ship1Name;
+    static ServShip ship1;
    
     @RequestMapping("/battle")
     public BattleStatus createBattle(@RequestParam(name="name")String name,
-    		@RequestParam(name="shipName")String shipName,
+    		@RequestParam(name="ship")ServShip ship,
     		@RequestParam(name="status")String status)
     {
     	for(Player i:waitQueue)
@@ -45,7 +45,7 @@ public class StarProjectServApplicationTests extends HttpServlet {
     			return new BattleStatus(null,waitQueue.size(),null,null,"wait",null);
     		}
     		}
-    		waitQueue.add(new Player(name,shipName));
+    		waitQueue.add(new Player(name,ship));
     		
     		
     	case "wait":
@@ -65,16 +65,16 @@ public class StarProjectServApplicationTests extends HttpServlet {
     				waitQueue.remove(0);
     				battleIsExist=false;
     				battleNumber++;
-    				return new BattleStatus(battleNumber-1,waitQueue.size(),player1Name,ship1Name,"ready",1);
+    				return new BattleStatus(battleNumber-1,waitQueue.size(),player1Name,ship1,"ready",1);
     			     }
     			else
     			     {
     				
     				player1Name=name;
-    				ship1Name=shipName;
+    				ship1=ship;
     				waitQueue.remove(0);
     				battleIsExist=true;
-    				return new BattleStatus(battleNumber,waitQueue.size(),waitQueue.get(0).getName(),waitQueue.get(0).getShipName(),"ready",2);
+    				return new BattleStatus(battleNumber,waitQueue.size(),waitQueue.get(0).getName(),waitQueue.get(0).getShip(),"ready",2);
     			      }
     			}
     			else return new BattleStatus(null,waitQueue.size(),null,null,"wait",null);
