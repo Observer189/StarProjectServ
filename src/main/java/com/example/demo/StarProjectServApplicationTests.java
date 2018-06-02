@@ -45,7 +45,7 @@ public class StarProjectServApplicationTests extends HttpServlet {
     			return new BattleStatus(null,waitQueue.size(),null,null,"wait",null);
     		}
     		}
-    		waitQueue.add(new Player(name,ship));
+    		waitQueue.add(new Player(name,new ServShip("Dashing")));
     		
     		
     	case "wait":
