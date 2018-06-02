@@ -11,7 +11,7 @@ public class Player {
     public Player(String name,ServShip ship)
     {
     	this.name=name;
-    	this.ship=new ServShip(ship);
+    	this.ship=ship;
     }
     public Player(String name,String password,int money,ServShip ship)
     {
