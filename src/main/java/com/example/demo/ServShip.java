@@ -2,22 +2,22 @@ package com.example.demo;
 
 public class ServShip {
     private String name;
-    private String weaponName;
+    //private String weaponName;
     //private ServFixingPoint[] fixingPoints;
     public ServShip()
     {
 
     }
-    public ServShip(String name,String weaponName/*,ServFixingPoint[] fixingPoints*/)
+    public ServShip(String name/*,String weaponName,ServFixingPoint[] fixingPoints*/)
     {
         this.name=name.toString();
-        this.weaponName=weaponName;
+        //this.weaponName=weaponName;
         // this.fixingPoints=fixingPoints;
     }
     public ServShip(ServShip ship)
     {
         this.name=ship.getName();
-        this.weaponName=ship.getWeaponName();
+        //this.weaponName=ship.getWeaponName();
         //this.fixingPoints=ship.getFixingPoints();
     }
 
@@ -29,13 +29,13 @@ public class ServShip {
         this.name = name;
     }
 
-    public String getWeaponName() {
+    /*public String getWeaponName() {
         return weaponName;
     }
 
     public void setWeaponName(String weaponName) {
         this.weaponName = weaponName;
-    }
+    }*/
     /*public ServFixingPoint[] getFixingPoints() {
         return fixingPoints;
     }
@@ -48,7 +48,8 @@ public class ServShip {
 
 
     public String toString() {
-        return name+weaponName;
+        return name;
     }
 }
+
 
