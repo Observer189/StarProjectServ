@@ -48,7 +48,7 @@ public class ServShip {
 
 
     public String toString() {
-        return name;
+        return name+weaponName;
     }
 }
 
